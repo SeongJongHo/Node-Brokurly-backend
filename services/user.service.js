@@ -10,7 +10,7 @@ const checkEmail = async(email)=>{
     
     return user??true
 }
-const checkUsername = (req, res)=>{
+const checkUsername = async(req, res)=>{
     const user = await db.User.findOne({where: {username: username}})
     
     if(user) throw {status:400, message: 'username exist'}

@@ -36,7 +36,6 @@ const addCart = async(user, product_id, quantity)=>{
     else{
         cart.quantity += quantity;
         await cart.save()
-
         return cart
     }
 }

@@ -4,7 +4,7 @@ const getProducts = (req, res)=>{
     try{
         const menu = req.query.menu? req.query.menu : [1,...4]
         const category = req.query.category? req.query.category : [1,...11];            
-        const result = productService.getProduct(menu, category)
+        const result = productService.getProducts(menu, category)
 
         return res.status(200).json({message: 'success', result: result}) 
     }

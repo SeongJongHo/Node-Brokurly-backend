@@ -1,7 +1,8 @@
 const {cartService} = require('../services');
 
-const getCart = async(req, res, next)=>{
+const getCart = async(req, res)=>{
     try{
+        console.log(1)
         const result = await cartService.getCart(req.user)
 
         return res.status(200).json({message: 'success', result: result})
@@ -22,7 +23,7 @@ const addCart = async(req, res)=>{
         return res.status(err.status || 400).json({message: err.message || 'error'})
     }  
 }
-const updateCart = (req, res)=>{
+const updateCart = async(req, res)=>{
     if(!req.body)return res.status(400).json({message: "BAD_REQUEST"})
     try{
         const result = await cartService.updateCart(req.user, req.body.cart_id, req.body.quantity)
@@ -33,11 +34,11 @@ const updateCart = (req, res)=>{
         return res.status(err.status || 400).json({message: err.message || 'error'})
     }
 }
-const deleteCart = (req, res)=>{
+const deleteCart = async(req, res)=>{
     try{
         if(!req.body)return res.status(400).json({message: "BAD_REQUEST"})
 
-        const result = await cartService.addCart(req.user, req.body.cart_id)
+        const result = await cartService.deleteCart(req.user, req.body.cart_id)
 
         return res.status(200).json({message: 'success', result: result})
     }

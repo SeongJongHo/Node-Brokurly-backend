@@ -12,21 +12,15 @@ const orderStatus= {
     ORDER_CANCELLATION : 9
 }
 
-const getOrder = (user)=>{
+const getOrder = async(user)=>{
     const order = await db.Order.findAll({
         where: {
-            users_id: req.user
+            users_id: user
         },
         include: {
-            model: db.OrderStatus,
             model: db.OrderItem,
             include:{
-                model: db.OrderItemStatus,
                 model: db.Product,
-                include:{
-                    model: db.Image,
-                    attributes: ['url']
-                }
             }
         }
     }).catch((err)=>{

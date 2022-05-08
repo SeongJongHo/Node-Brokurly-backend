@@ -1,6 +1,6 @@
 const {orderService} = require('../services')
 
-const getOrder = (req, res)=>{
+const getOrder = async(req, res)=>{
     try{
         const result = await orderService.getOrder(req.user)
 
