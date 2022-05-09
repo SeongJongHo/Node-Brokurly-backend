@@ -14,14 +14,16 @@ const orderStatus= {
 
 const getOrder = async(user)=>{
     const order = await db.Order.findAll({
-        where: {
-            users_id: user
-        },
         include: {
             model: db.OrderItem,
             include:{
                 model: db.Product,
+                model: db.OrderItemStatus,
+                
             }
+        },
+        where: {
+            users_id: user
         }
     }).catch((err)=>{
         throw {status: 400, message: err.message}
